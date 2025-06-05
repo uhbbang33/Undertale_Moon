@@ -1,33 +1,49 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove : Move
+public class PlayerMove : MonoBehaviour
 {
-    private Vector2 _lastDirection;
-    private Animator _animator;
+    private InputActions _inputActions;
+    protected Vector2 _moveDirection;
+    private Rigidbody2D _rb;
 
-    protected override void Awake()
+    [SerializeField] private float _moveSpeed;
+
+    protected virtual void Awake()
     {
-        base.Awake();
-
-        _animator = GetComponent<Animator>();
+        _moveDirection = Vector2.zero;
+        _inputActions = new InputActions();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-    protected override void FixedUpdate()
+    private void OnEnable()
     {
-        base.FixedUpdate();
+        _inputActions.Enable();
 
-        if (_moveDirection != Vector2.zero)
-        {
-            _animator.SetBool("IsMoving", true);
-            _lastDirection = _moveDirection;
-        }
-        else
-            _animator.SetBool("IsMoving", false);
+        _inputActions.Player.Move.performed += OnMovePerformed;
+        _inputActions.Player.Move.canceled += OnMoveCanceled;
+    }
 
-        _animator.SetFloat("MoveX", _moveDirection.x);
-        _animator.SetFloat("MoveY", _moveDirection.y);
-        _animator.SetFloat("StopX", _lastDirection.x);
-        _animator.SetFloat("StopY", _lastDirection.y);
+    private void OnDisable()
+    {
+        _inputActions.Player.Move.performed -= OnMovePerformed;
+        _inputActions.Player.Move.canceled -= OnMoveCanceled;
+
+        _inputActions.Disable();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        _rb.linearVelocity = new Vector2(_moveDirection.x * _moveSpeed, _moveDirection.y * _moveSpeed);
+    }
+
+    private void OnMovePerformed(InputAction.CallbackContext context)
+    {
+        _moveDirection = context.ReadValue<Vector2>().normalized;
+    }
+
+    private void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        _moveDirection = Vector2.zero;
     }
 }
