@@ -10,7 +10,7 @@ public class FrogHeadMove : MonoBehaviour
 
     private void Awake()
     {
-        _startPosition = transform.position;
+        _startPosition = transform.localPosition;
     }
 
     void Update()

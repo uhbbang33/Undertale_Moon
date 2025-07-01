@@ -266,6 +266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dba2245ccd82aa4b9cb7a88cf0c7f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePeriod: 5
-  moveXScale: 0.8
-  moveYScale: 0.3
+  _movePeriod: 3
+  _moveXScale: 1
+  _moveYScale: 0.5
