@@ -1964,9 +1964,9 @@ GameObject:
   - component: {fileID: 1754607040}
   - component: {fileID: 1754607039}
   - component: {fileID: 1754607041}
-  - component: {fileID: 1754607043}
   - component: {fileID: 1754607042}
   - component: {fileID: 1754607044}
+  - component: {fileID: 1754607043}
   m_Layer: 0
   m_Name: Player_Heart
   m_TagString: Untagged
