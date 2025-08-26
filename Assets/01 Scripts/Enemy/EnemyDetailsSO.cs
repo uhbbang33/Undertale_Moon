@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyDetails_", menuName = "Scriptable Objects/Enemy/Enemy Details")]
-public class EnemyDetailsSO : MonoBehaviour
+public class EnemyDetailsSO : ScriptableObject
 {
     [SerializeField] private string _enemyName;
     [SerializeField] private int _attackPower;
