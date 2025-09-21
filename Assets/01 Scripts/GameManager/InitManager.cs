@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 public class InitManager : MonoBehaviour
 {
     // TODO: Intro Scene
-    [SerializeField] private GameObject GameManagerPrefab;
-
 
     private void Awake()
     {
-        Instantiate(GameManagerPrefab);
+        Instantiate(GameResources.Instance.GameManagerPrefab);
     }
 
     private void Start()
@@ -23,9 +21,7 @@ public class InitManager : MonoBehaviour
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         op.completed += (asyncOp) =>
-        {
-
-        };
+        { };
 
         yield return op;
     }

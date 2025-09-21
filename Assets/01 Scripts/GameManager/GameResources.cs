@@ -17,8 +17,13 @@ public class GameResources : MonoBehaviour
         }
     }
 
+    #region GAMEMANAGER
+    [Space(10)]
+    [Header("GAME MANAGER")]
+    public GameObject GameManagerPrefab;
+    #endregion
 
-    #region
+    #region PLAYER
     [Space(10)]
     [Header("PLAYER")]
     public GameObject PlayerPrefab;

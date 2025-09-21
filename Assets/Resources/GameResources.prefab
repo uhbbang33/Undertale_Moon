@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeeae713b54f5924cbb8df36dc067d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManagerPrefab: {fileID: 7185022689187220902, guid: d3951ccebc77ad745835dc0fd6d95e18, type: 3}
   PlayerPrefab: {fileID: 5540258077012799967, guid: 0b51b5662821081438e493d401cfbae7, type: 3}
   PlayerDetails: {fileID: 11400000, guid: 2f62609f30af261469e3076d7e90d2e9, type: 2}
-  PlayerInputAction: {fileID: -944628639613478452, guid: 74551fb096bd60a449a8639ed7c5d27d, type: 3}
