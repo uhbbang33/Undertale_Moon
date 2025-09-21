@@ -17,3 +17,4 @@ MonoBehaviour:
   _maxHealth: 100
   _moveSpeed: 20
   _afterHitInvincibleTime: 1
+  _lobbyPosition: {x: -5, y: -3}
