@@ -1,16 +1,27 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class LobyScenePlayerMove : PlayerMove
+[DisallowMultipleComponent]
+public class LobbyScenePlayerMove : PlayerMove
 {
     private Vector2 _lastDirection;
     private Animator _animator;
+    private PlayerDetailsSO _playerDetails;
 
     protected override void Awake()
     {
         base.Awake();
 
         _animator = GetComponent<Animator>();
+        _playerDetails = GameResources.Instance.PlayerDetails;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        transform.position = _playerDetails.LobbyPosition;
     }
 
     protected override void FixedUpdate()
@@ -21,6 +32,8 @@ public class LobyScenePlayerMove : PlayerMove
         {
             _animator.SetBool("IsMoving", true);
             _lastDirection = _moveDirection;
+
+            GameManager.Instance.ReduceEnemyAppearTime(Time.fixedDeltaTime);
         }
         else
             _animator.SetBool("IsMoving", false);

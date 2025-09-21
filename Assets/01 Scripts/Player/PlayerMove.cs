@@ -12,11 +12,11 @@ public class PlayerMove : MonoBehaviour
     protected virtual void Awake()
     {
         _moveDirection = Vector2.zero;
-        _inputActions = new InputActions();
         _rb = GetComponent<Rigidbody2D>();
+        _inputActions = new InputActions();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _inputActions.Enable();
 
@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
         _inputActions.Player.Move.canceled += OnMoveCanceled;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _inputActions.Player.Move.performed -= OnMovePerformed;
         _inputActions.Player.Move.canceled -= OnMoveCanceled;

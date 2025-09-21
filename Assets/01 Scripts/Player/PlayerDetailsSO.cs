@@ -11,6 +11,7 @@ public class PlayerDetailsSO : ScriptableObject
     [SerializeField] private int _maxHealth;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _afterHitInvincibleTime;
+    [SerializeField] private Vector2 _lobbyPosition;
 
     public string PlayerName => _playerName;
     public int Level => _level;
@@ -19,6 +20,7 @@ public class PlayerDetailsSO : ScriptableObject
     public int MaxHealth => _maxHealth;
     public float MoveSpeed => _moveSpeed;
     public float AfterHitInvincibleTime => _afterHitInvincibleTime;
+    public Vector3 LobbyPosition => _lobbyPosition;
 
     //[Header("ITEM")]
     //[SerializeField] private List<ItemSO> _initialItemList;

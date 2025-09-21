@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
         if (_player != null)
         {
             _maxHealth = maxHealth;
-            _waitForSecondsInvincibleTime = new WaitForSeconds(_player._playerDetails.AfterHitInvincibleTime);
+            _waitForSecondsInvincibleTime = new WaitForSeconds(GameResources.Instance.PlayerDetails.AfterHitInvincibleTime);
         }
         else if (_enemy != null)
         {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameResources : MonoBehaviour
 {
@@ -16,4 +17,11 @@ public class GameResources : MonoBehaviour
         }
     }
 
+
+    #region
+    [Space(10)]
+    [Header("PLAYER")]
+    public GameObject PlayerPrefab;
+    public PlayerDetailsSO PlayerDetails;
+    #endregion
 }
