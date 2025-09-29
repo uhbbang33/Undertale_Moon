@@ -30,6 +30,8 @@ public class PlayerMove : MonoBehaviour
         _inputActions.Player.Move.canceled -= OnMoveCanceled;
 
         _inputActions.Disable();
+
+        _moveDirection = Vector2.zero;
     }
 
     protected virtual void FixedUpdate()
