@@ -1,21 +1,15 @@
 using System.Collections;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [DisallowMultipleComponent]
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    private Player _player;
-    public Player Player => _player;
-
     [SerializeField] private float _minEnemyAppearTime; 
     [SerializeField] private float _maxEnemyAppearTime;
 
     private float _enemyAppearTime;
-
-    private LobbyCamera _lobbyCam;
-    public LobbyCamera LobbyCam => _lobbyCam;
+    private Player _player;
 
     protected override void Awake()
     {
@@ -25,7 +19,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         GameObject playerObject = Instantiate(GameResources.Instance.PlayerPrefab, Vector3.zero, Quaternion.identity);
 
         _player = playerObject.GetComponent<Player>();
-
+        _player.ChangePlayer(true);
     }
 
     private void Start()
@@ -56,11 +50,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void ChangeSceneLobbyToBattle()
     {
+        _player.SaveLobbyPosition();
+
         //TODO: async로 하트 깜박이는 연출 후 화면전환
         SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
         _player.ChangePlayer(false);
 
-        // temp
+        // TODO: temp
         StartCoroutine(ChangeSceneCoroutine());
     }
 
