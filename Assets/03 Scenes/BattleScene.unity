@@ -592,7 +592,7 @@ MonoBehaviour:
   _leftLine: {fileID: 2091643564}
   _rightLine: {fileID: 145138602}
   _lineThickness: 0.5
-  _initialWidth: 20
+  _initialWidth: 70
   _initialHeight: 15
   _lineWidthOffest: 0
   _lineHeightOffest: 0.5
