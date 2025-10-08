@@ -25,10 +25,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     void Start()
     {
         _state = BattleState.START;
-
+        
         EventSystem.current.SetSelectedGameObject(_fightButton.gameObject);
-
-        //MenuButtonHighlighted(_fightButton);
 
         // TODO: Button.OnClick.Invoke() 로 메뉴 넘어가기
     }
