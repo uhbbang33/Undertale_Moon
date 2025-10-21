@@ -9,11 +9,19 @@ public class EnemyDetailsSO : ScriptableObject
     [SerializeField] private int _attackPower;
     [SerializeField] private int _defencePower;
     [SerializeField] private int _maxHp;
+
+    [SerializeField] private string _startText;
+    [SerializeField] private string _signatureText;
+    [SerializeField] private string[] _acts;
+    [SerializeField] private string[] _actText;
+
     public string EnemyName => _enemyName;
     public int AttackPower => _attackPower;
     public int DefencePower => _defencePower;
     public int MaxHealth => _maxHp;
 
-    //[Header("SKILL")]
-    //[SerializeField] private List<GameObject> _skillList;
+    public string StartText => _startText;
+    public string SignatureText => _signatureText;
+    public string[] Acts => _acts;
+    public string[] ActText => _actText;
 }
