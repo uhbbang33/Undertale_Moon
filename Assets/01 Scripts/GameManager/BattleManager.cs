@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public enum BattleState
 {
@@ -26,7 +27,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     [SerializeField] private GameObject _text;
     [SerializeField] private GameObject _menuInBattleBox;
-    [SerializeField] private GameObject _attackBackground;
+    [SerializeField] private GameObject _attackMode;
+    [SerializeField] private GameObject _attackBar;
 
     private InputActions _inputActions;
     private BattleMenuButton _curMenu;
@@ -109,9 +111,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         _menuInBattleBox.SetActive(false);
         _menuHeart.SetActive(false);
-        _attackBackground.SetActive(true);
-
-
+        _attackMode.SetActive(true);
     }
 
     #region INPUT_SYSTEM
@@ -123,6 +123,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             _battleState = BattleState.SELECT_TARGET;
 
             ShowTargetEnemies();
+
+            _curMenu = null;
         }
     }
 

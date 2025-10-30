@@ -7,7 +7,7 @@ public class DetailMenuButton : MonoBehaviour, ISelectHandler, ISubmitHandler
     {
         BattleManager.Instance.DetailMenuButtonHighlighted(this);
     }
-
+    
     public void OnSubmit(BaseEventData eventData)
     {
         BattleManager.Instance.PlayerAttackMode();
