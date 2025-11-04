@@ -12,20 +12,20 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
 
     private SpriteRenderer _spriteRenderer;
     private Coroutine _curCoroutine;
-    private WaitForSeconds waitForBlink;
-    private Tween tween;
+    private WaitForSeconds _waitForBlink;
+    private Tween _tween;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        waitForBlink = new WaitForSeconds(_blinkInterval);
+        _waitForBlink = new WaitForSeconds(_blinkInterval);
     }
 
     private void OnEnable()
     {
         EventSystem.current.SetSelectedGameObject(gameObject);
 
-        tween = transform.DOMoveX(35f, 1.5f)
+        _tween = transform.DOMoveX(35f, 1.5f)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.Linear);
     }
@@ -39,7 +39,7 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
             else
                 _spriteRenderer.sprite = _originSprite;
 
-            yield return waitForBlink;
+            yield return _waitForBlink;
         }
 
         _spriteRenderer.sprite = _originSprite;
@@ -50,14 +50,10 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
 
     public void OnSubmit(BaseEventData eventData)
     {
-        tween.Kill();
+        _tween.Kill();
 
-        // 공격 모션(위에서 아래로 공격)
-        // 애니메이션?
+        BattleManager.Instance.EnemyHit();
 
-
-
-        // 깜박거림
         _curCoroutine = StartCoroutine(BlinkRoutine());
 
         // 적에게 데미지

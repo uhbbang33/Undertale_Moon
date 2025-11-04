@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public enum BattleState
 {
@@ -23,6 +22,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     [Tooltip("max 6")]
     [SerializeField] private List<EnemyDetailsSO> _enemies;
+    [SerializeField] private List<Transform> _enemiesPos;
     [SerializeField] private List<TextMeshProUGUI> _nameTexts;
 
     [SerializeField] private GameObject _text;
@@ -32,14 +32,23 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     private InputActions _inputActions;
     private BattleMenuButton _curMenu;
+    [SerializeField] private List<DetailMenuButton> _detailButtons;
     private DetailMenuButton _curDetailMenu;
     private BattleState _battleState;
     private BattleState _prevBattleState;
+    private Enemy _curTargetEnemy;
+
+    public Enemy CurTargetEnemy
+    {
+        get { return _curTargetEnemy; }
+        set { _curTargetEnemy = value; }
+    }
+
 
     private readonly Vector3 _menuOffset = new Vector3(-5, 0, 0);
     private readonly Vector3 _detailMenuOffset = new Vector3(-18, 0, 0);
 
-
+   
     #region MonoBehaviour
 
     protected override void Awake()
@@ -77,6 +86,18 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     private void InitEnemies()
     {
+        for(int i = 0; i< _enemies.Count; ++i)
+        {
+            GameObject enemyObject = Instantiate(_enemies[i].EnemyPrfab, _enemiesPos[i].position, Quaternion.identity);
+
+            _detailButtons[i].enemy = enemyObject.GetComponent<Enemy>();
+        }
+
+        InitEnemiesNameText();
+    }
+
+    private void InitEnemiesNameText()
+    {
         for (int i = 0; i < _enemies.Count; ++i)
         {
             _nameTexts[i].transform.parent.gameObject.SetActive(true);
@@ -112,6 +133,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         _menuInBattleBox.SetActive(false);
         _menuHeart.SetActive(false);
         _attackMode.SetActive(true);
+    }
+
+    public void EnemyHit()
+    {
+        _curTargetEnemy.EnemyHit();
     }
 
     #region INPUT_SYSTEM

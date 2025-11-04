@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyDetails_", menuName = "Scriptable Objects/Enemy/Enemy Details")]
 public class EnemyDetailsSO : ScriptableObject
 {
+    [SerializeField] private GameObject _enemyPrefab;
+
     [SerializeField] private string _enemyName;
     [SerializeField] private int _attackPower;
     [SerializeField] private int _defencePower;
@@ -15,6 +17,7 @@ public class EnemyDetailsSO : ScriptableObject
     [SerializeField] private string[] _acts;
     [SerializeField] private string[] _actText;
 
+    public GameObject EnemyPrfab => _enemyPrefab;
     public string EnemyName => _enemyName;
     public int AttackPower => _attackPower;
     public int DefencePower => _defencePower;

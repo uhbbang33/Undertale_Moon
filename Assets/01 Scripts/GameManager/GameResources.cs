@@ -29,4 +29,10 @@ public class GameResources : MonoBehaviour
     public GameObject PlayerPrefab;
     public PlayerDetailsSO PlayerDetails;
     #endregion
+
+    #region ENEMY
+    [Space(10)]
+    [Header("ENEMY")]
+    public EnemyDetailsSO FroggitDetails;
+    #endregion
 }
