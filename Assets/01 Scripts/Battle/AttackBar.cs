@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class AttackBar : MonoBehaviour, ISubmitHandler
 {
@@ -10,6 +11,7 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
     [SerializeField] private float _blinkInterval;
     [SerializeField] private int _blinkCount;
 
+    private Button _btn;
     private SpriteRenderer _spriteRenderer;
     private Coroutine _curCoroutine;
     private WaitForSeconds _waitForBlink;
@@ -17,6 +19,7 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
 
     private void Awake()
     {
+        _btn = GetComponent<Button>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _waitForBlink = new WaitForSeconds(_blinkInterval);
     }
@@ -28,6 +31,8 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
         _tween = transform.DOMoveX(35f, 1.5f)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.Linear);
+
+        _btn.interactable = true;
     }
 
     private IEnumerator BlinkRoutine()
@@ -50,6 +55,8 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
 
     public void OnSubmit(BaseEventData eventData)
     {
+        _btn.interactable = false;
+
         _tween.Kill();
 
         BattleManager.Instance.EnemyHit();
