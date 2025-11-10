@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     private PlayerDetailsSO _playerDetails;
     private Health _health;
 
+    private int _playerAttackPower;
+    public int PlayerAttackPower => _playerAttackPower;
+
     public GameObject LobbyPlayer => _lobbyPlayer;
 
     private void Awake()
@@ -16,6 +19,11 @@ public class Player : MonoBehaviour
         Initialize();
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        _playerAttackPower = _playerDetails.AttackPower;
     }
 
     private void Initialize()

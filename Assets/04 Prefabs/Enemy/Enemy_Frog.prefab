@@ -159,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitAnim: {fileID: 5253155166155890797}
   _headMove: {fileID: 3582974817345602375}
-  _enemyDetails: {fileID: 0}
+  _enemyDetails: {fileID: 11400000, guid: 2a8a971e75e32eb4d91a57957dd5ae66, type: 2}
 --- !u!1 &7773324778130707382
 GameObject:
   m_ObjectHideFlags: 0

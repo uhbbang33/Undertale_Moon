@@ -42,6 +42,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     // TODO : Init에서 생성된 Player Heart 넣기 ( SerializeField 삭제 )
     [SerializeField] private GameObject _playerHeart;
 
+    // TODO : GameManager에서 받기
+    [SerializeField] private Player _player;
+
     [SerializeField] private float _battleSize_Height;
     [SerializeField] private float _battleSize_Width;
 
@@ -71,14 +74,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         
         _inputActions.UI.Submit.performed += OnSubmitPerformed;
 
-        _attackBar.OnAttack += Attack;
+        _attackBar.OnAttack += PlayerAttack;
     }
 
     private void OnDisable()
     {
         _inputActions.UI.Submit.performed -= OnSubmitPerformed;
 
-        _attackBar.OnAttack -= Attack;
+        _attackBar.OnAttack -= PlayerAttack;
 
         _inputActions.Disable();
     }
@@ -155,16 +158,26 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         _battleBox.ChangeHeight(_battleSize_Height);
 
         _playerHeart.SetActive(true);
+
+        // TODO: 2초 후 개구리 스킬
     }
 
-    public void EnemyHit()
+    public void PlayerAttack(float bonus)
     {
-        _curTargetEnemy.EnemyHit();
-    }
+        int r = Random.Range(0, 3);
 
-    private void Attack(float bouns)
-    {
-        //_player.PlayerAttackPower - 
+        // Round((PlayerATK - MonsterDEF + r) * bonus)
+        float damageAmount = Mathf.Round(((float)_player.PlayerAttackPower -
+        (float)_curTargetEnemy.DefensePower + r) * bonus);
+
+        if(damageAmount < 0)
+        {
+            Debug.LogError("Player Attack Power is lower than Monster Defense Power");
+        }
+
+        _curTargetEnemy.EnemyHit((int)damageAmount);
+
+        Debug.Log("DamageAmount : " + damageAmount);
     }
 
     #region INPUT_SYSTEM

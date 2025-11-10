@@ -74,11 +74,11 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
 
         _tween.Kill();
 
-        BattleManager.Instance.EnemyHit();
+        BattleManager.Instance.PlayerAttack(CalculateBonusDamage());
 
         _curCoroutine = StartCoroutine(BlinkRoutine());
 
-        OnAttack?.Invoke(CalculateBonusDamage());
+        //OnAttack?.Invoke(CalculateBonusDamage());
     }
 
     private float CalculateBonusDamage()

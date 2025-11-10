@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Animator _hitAnim;
@@ -10,16 +11,21 @@ public class Enemy : MonoBehaviour
     public EnemyDetailsSO _enemyDetails;
     private Health _health;
 
+    public int DefensePower => _enemyDetails.DefencePower;
+
     public event Action OnHit;
 
-    private void Initialize(PlayerDetailsSO playerDetails)
+    private void Awake()
     {
+        _health = GetComponent<Health>();
         _health.SetStartHealth(_enemyDetails.MaxHealth);
     }
 
-    public void EnemyHit()
+    public void EnemyHit(int damageAmount)
     {
         _hitAnim.SetTrigger("Hit");
+
+        _health.TakeDamage(damageAmount);
     }
 
     public void AfterHitAnim()
