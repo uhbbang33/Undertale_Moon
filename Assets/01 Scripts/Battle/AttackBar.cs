@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class AttackBar : MonoBehaviour, ISubmitHandler
 {
@@ -16,12 +17,19 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
     private Coroutine _curCoroutine;
     private WaitForSeconds _waitForBlink;
     private Tween _tween;
+    private float _originXPos;
+
+    private readonly float _maxBonus = 2.2f;
+    private readonly float _minBouns = 1.0f;
+
+    public event Action<float> OnAttack;
 
     private void Awake()
     {
         _btn = GetComponent<Button>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _waitForBlink = new WaitForSeconds(_blinkInterval);
+        _originXPos = transform.position.x;
     }
 
     private void OnEnable()
@@ -33,6 +41,11 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
             .SetEase(Ease.Linear);
 
         _btn.interactable = true;
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(_curCoroutine);
     }
 
     private IEnumerator BlinkRoutine()
@@ -48,10 +61,12 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
         }
 
         _spriteRenderer.sprite = _originSprite;
+
+        BattleManager.Instance.EnemyAttackMode();
         StopCoroutine(_curCoroutine);
+
         yield return null;
     }
-    
 
     public void OnSubmit(BaseEventData eventData)
     {
@@ -63,8 +78,13 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
 
         _curCoroutine = StartCoroutine(BlinkRoutine());
 
-        // 적에게 데미지
+        OnAttack?.Invoke(CalculateBonusDamage());
+    }
 
+    private float CalculateBonusDamage()
+    {
+        float x = Math.Abs(transform.position.x) / Math.Abs(_originXPos);
 
+        return _maxBonus - (x * (_maxBonus - _minBouns));
     }
 }

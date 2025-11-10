@@ -11,6 +11,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private float _enemyAppearTime;
     private Player _player;
 
+    public Player player { get { return _player; } }
+
     protected override void Awake()
     {
         base.Awake();
@@ -52,12 +54,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         _player.SaveLobbyPosition();
 
-        //TODO: async·Î ÇÏÆ® ±ô¹ÚÀÌ´Â ¿¬Ãâ ÈÄ È­¸éÀüÈ¯
+        //TODO: asyncë¡œ í•˜íŠ¸ ê¹œë°•ì´ëŠ” ì—°ì¶œ í›„ í™”ë©´ì „í™˜
         SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
         _player.ChangePlayer(false);
 
         // TODO: temp
-        StartCoroutine(ChangeSceneCoroutine());
+        //StartCoroutine(ChangeSceneCoroutine());
     }
 
     private void ChangeSceneBattleToLobby()

@@ -19,6 +19,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     [SerializeField] private BattleMenuButton _fightButton;
     [SerializeField] private Button _detailButtons_first;
     [SerializeField] private GameObject _menuHeart;
+    [SerializeField] private AttackBar _attackBar;
+    [SerializeField] private BattleBox _battleBox;
 
     [Tooltip("max 6")]
     [SerializeField] private List<EnemyDetailsSO> _enemies;
@@ -27,8 +29,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     [SerializeField] private GameObject _text;
     [SerializeField] private GameObject _menuInBattleBox;
-    [SerializeField] private GameObject _attackMode;
-    [SerializeField] private GameObject _attackBar;
+    [SerializeField] private GameObject _playerAttackMode;
 
     private InputActions _inputActions;
     private BattleMenuButton _curMenu;
@@ -37,6 +38,12 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private BattleState _battleState;
     private BattleState _prevBattleState;
     private Enemy _curTargetEnemy;
+
+    // TODO : Init에서 생성된 Player Heart 넣기 ( SerializeField 삭제 )
+    [SerializeField] private GameObject _playerHeart;
+
+    [SerializeField] private float _battleSize_Height;
+    [SerializeField] private float _battleSize_Width;
 
     public Enemy CurTargetEnemy
     {
@@ -48,7 +55,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private readonly Vector3 _menuOffset = new Vector3(-5, 0, 0);
     private readonly Vector3 _detailMenuOffset = new Vector3(-18, 0, 0);
 
-   
+
     #region MonoBehaviour
 
     protected override void Awake()
@@ -63,11 +70,15 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         _inputActions.Enable();
         
         _inputActions.UI.Submit.performed += OnSubmitPerformed;
+
+        _attackBar.OnAttack += Attack;
     }
 
     private void OnDisable()
     {
         _inputActions.UI.Submit.performed -= OnSubmitPerformed;
+
+        _attackBar.OnAttack -= Attack;
 
         _inputActions.Disable();
     }
@@ -76,6 +87,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         _prevBattleState = BattleState.SELECT_MENU;
         _battleState = BattleState.SELECT_MENU;
+        //_player = GameManager.Instance.player;
 
         EventSystem.current.SetSelectedGameObject(_fightButton.gameObject);
 
@@ -132,12 +144,27 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         _menuInBattleBox.SetActive(false);
         _menuHeart.SetActive(false);
-        _attackMode.SetActive(true);
+        _playerAttackMode.SetActive(true);
+    }
+
+    public void EnemyAttackMode()
+    {
+        _playerAttackMode.SetActive(false);
+
+        _battleBox.ChangeWidth(_battleSize_Width);
+        _battleBox.ChangeHeight(_battleSize_Height);
+
+        _playerHeart.SetActive(true);
     }
 
     public void EnemyHit()
     {
         _curTargetEnemy.EnemyHit();
+    }
+
+    private void Attack(float bouns)
+    {
+        //_player.PlayerAttackPower - 
     }
 
     #region INPUT_SYSTEM

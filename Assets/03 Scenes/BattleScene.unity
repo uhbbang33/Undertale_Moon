@@ -2406,7 +2406,7 @@ MonoBehaviour:
   _originSprite: {fileID: -7307362270649411984, guid: 104299be90e78164ab2035d503087d97, type: 3}
   _hitSprite: {fileID: 9052113348759210792, guid: 104299be90e78164ab2035d503087d97, type: 3}
   _blinkInterval: 0.1
-  _blinkCount: 4
+  _blinkCount: 20
 --- !u!114 &1083281905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4468,6 +4468,8 @@ MonoBehaviour:
   _fightButton: {fileID: 1006947008}
   _detailButtons_first: {fileID: 886535960}
   _menuHeart: {fileID: 1650603674}
+  _attackBar: {fileID: 1083281904}
+  _battleBox: {fileID: 225176931}
   _enemies:
   - {fileID: 11400000, guid: 2a8a971e75e32eb4d91a57957dd5ae66, type: 2}
   _enemiesPos:
@@ -4481,8 +4483,7 @@ MonoBehaviour:
   - {fileID: 79694674}
   _text: {fileID: 1823340986}
   _menuInBattleBox: {fileID: 740071561}
-  _attackMode: {fileID: 707798268}
-  _attackBar: {fileID: 1083281901}
+  _playerAttackMode: {fileID: 707798268}
   _detailButtons:
   - {fileID: 886535962}
   - {fileID: 699580992}
@@ -4490,6 +4491,9 @@ MonoBehaviour:
   - {fileID: 279383276}
   - {fileID: 1340883299}
   - {fileID: 47921841}
+  _playerHeart: {fileID: 1754607038}
+  _battleSize_Height: 15
+  _battleSize_Width: 20
 --- !u!4 &1947711462
 Transform:
   m_ObjectHideFlags: 0
