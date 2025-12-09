@@ -2679,9 +2679,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pools:
-  - PoolName: 
-    PoolSize: 0
-    Prefab: {fileID: 0}
+  - PoolName: Number0
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: d1c0c19513513e74aa6f529ca43cbb53, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number1
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: 38a53b469bec41741b86477b3b389d94, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number2
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: 372a046f4821de84ea75907a2d795108, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number3
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: a5e20095346c3244da40952ddafea0b2, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number4
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: 88e6419abd7cda145b92033f3be6e304, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number5
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: dec23a20ab83766489808fffbe4abb30, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number6
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: 0bbfc198f0cd2fe40bf9de29b3729427, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number7
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: bda3fd29d947fd24bacde5b8252a19c6, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number8
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: 53dffaf898645ad42a0e50dc090014ae, type: 3}
+    ParentTransform: {fileID: 0}
+  - PoolName: Number9
+    PoolSize: 3
+    Prefab: {fileID: 4017475305308409954, guid: 1f3a1fe18d95de34b8641910bdc50d40, type: 3}
     ParentTransform: {fileID: 0}
 --- !u!4 &1161790849
 Transform:
@@ -4917,8 +4953,8 @@ SceneRoots:
   - {fileID: 1397622810}
   - {fileID: 2040031175}
   - {fileID: 1947711462}
+  - {fileID: 1161790849}
   - {fileID: 225176930}
   - {fileID: 707798269}
   - {fileID: 1617991051}
   - {fileID: 2137232343}
-  - {fileID: 1161790849}

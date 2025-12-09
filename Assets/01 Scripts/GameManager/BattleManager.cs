@@ -88,8 +88,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     void Start()
     {
-        _prevBattleState = BattleState.SELECT_MENU;
-        _battleState = BattleState.SELECT_MENU;
+        //_prevBattleState = BattleState.SELECT_MENU;
+        //_battleState = BattleState.SELECT_MENU;
         //_player = GameManager.Instance.player;
 
         EventSystem.current.SetSelectedGameObject(_fightButton.gameObject);
@@ -166,18 +166,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         int r = Random.Range(0, 3);
 
-        // Round((PlayerATK - MonsterDEF + r) * bonus)
+        // Round((PlayerATK - EnemyDEF + r) * bonus)
         float damageAmount = Mathf.Round(((float)_player.PlayerAttackPower -
         (float)_curTargetEnemy.DefensePower + r) * bonus);
 
         if(damageAmount < 0)
-        {
-            Debug.LogError("Player Attack Power is lower than Monster Defense Power");
-        }
+            Debug.LogError("Player Attack Power is lower than Enemy Defense Power");
 
         _curTargetEnemy.EnemyHit((int)damageAmount);
-
-        Debug.Log("DamageAmount : " + damageAmount);
     }
 
     #region INPUT_SYSTEM

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager : SingletonMonoBehaviour<PoolManager>
 {
     [System.Serializable]
     public struct Pool
@@ -9,15 +9,17 @@ public class PoolManager : MonoBehaviour
         public string PoolName;
         public int PoolSize;
         public GameObject Prefab;
-        public Transform ParentTransform;
+        public Transform ParentTransform { get; set; }
     }
 
     [SerializeField] private List<Pool> _pools;
 
     private Dictionary<string, Queue<GameObject>> _poolDictionary;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _poolDictionary = new();
 
         for (int i = 0; i < _pools.Count; ++i)
@@ -41,6 +43,9 @@ public class PoolManager : MonoBehaviour
             for (int i = 0; i < pool.PoolSize; ++i)
             {
                 GameObject obj = Instantiate(pool.Prefab, parentObject.transform);
+
+                PoolObject poolObject = obj.AddComponent<PoolObject>();
+                poolObject.PoolKey = poolKey;
 
                 obj.SetActive(false);
 
@@ -77,14 +82,16 @@ public class PoolManager : MonoBehaviour
 
     public void ReturnObject(GameObject obj)
     {
-        if (_poolDictionary.ContainsKey(obj.name))
+        string poolKey = obj.GetComponent<PoolObject>().PoolKey;
+        
+        if (_poolDictionary.ContainsKey(poolKey))
         {
-            _poolDictionary[obj.name].Enqueue(obj);
+            _poolDictionary[poolKey].Enqueue(obj);
             obj.SetActive(false);
         }
         else
         {
-            Debug.LogError(obj.name + " key does not exist");
+            Debug.LogError(poolKey + " key does not exist");
         }
     }
 
