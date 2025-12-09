@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 8029360709681983589}
   - component: {fileID: 1413336745895189066}
   - component: {fileID: 5762623761405388721}
+  - component: {fileID: 201502748622361201}
   m_Layer: 0
   m_Name: Enemy_Frog
   m_TagString: Untagged
@@ -162,7 +163,6 @@ MonoBehaviour:
   _hitAnim: {fileID: 5253155166155890797}
   _headMove: {fileID: 3582974817345602375}
   _enemyDetails: {fileID: 11400000, guid: 2a8a971e75e32eb4d91a57957dd5ae66, type: 2}
-  _damagePosition: {fileID: 4103875310699892371}
 --- !u!114 &5762623761405388721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +175,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766154a82011c5047b970a8a28e324d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &201502748622361201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281575544006661452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c780bc3fa04bb24e9049712b7038fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damagePosition: {fileID: 4103875310699892371}
 --- !u!1 &3452908620445147695
 GameObject:
   m_ObjectHideFlags: 0
