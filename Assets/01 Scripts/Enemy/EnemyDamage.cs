@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyDamage : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class EnemyDamage : MonoBehaviour
 
     IEnumerator DamageRemoveRoutine(GameObject damageObj)
     {
+        damageObj.transform.DOJump(damageObj.transform.position, 2f, 1, 0.6f);
+
         yield return _waitForDamageShow;
 
         PoolManager.Instance.ReturnObject(damageObj);
