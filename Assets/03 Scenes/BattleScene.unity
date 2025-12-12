@@ -154,7 +154,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &15990728
 MonoBehaviour:
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2646,8 +2646,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -12.5, y: 0}
-  m_SizeDelta: {x: -25, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1161790847
 GameObject:
@@ -2682,43 +2682,33 @@ MonoBehaviour:
   - PoolName: Number0
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: d1c0c19513513e74aa6f529ca43cbb53, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number1
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: 38a53b469bec41741b86477b3b389d94, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number2
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: 372a046f4821de84ea75907a2d795108, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number3
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: a5e20095346c3244da40952ddafea0b2, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number4
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: 88e6419abd7cda145b92033f3be6e304, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number5
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: dec23a20ab83766489808fffbe4abb30, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number6
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: 0bbfc198f0cd2fe40bf9de29b3729427, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number7
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: bda3fd29d947fd24bacde5b8252a19c6, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number8
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: 53dffaf898645ad42a0e50dc090014ae, type: 3}
-    ParentTransform: {fileID: 0}
   - PoolName: Number9
     PoolSize: 3
     Prefab: {fileID: 4017475305308409954, guid: 1f3a1fe18d95de34b8641910bdc50d40, type: 3}
-    ParentTransform: {fileID: 0}
 --- !u!4 &1161790849
 Transform:
   m_ObjectHideFlags: 0
@@ -4353,6 +4343,7 @@ MonoBehaviour:
   _text: {fileID: 1823340986}
   _menuInBattleBox: {fileID: 740071561}
   _playerAttackMode: {fileID: 707798268}
+  _battleUI: {fileID: 1823945763}
   _detailButtons:
   - {fileID: 886535962}
   - {fileID: 699580992}

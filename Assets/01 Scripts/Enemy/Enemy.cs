@@ -4,6 +4,7 @@ using DG.Tweening;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(EnemyDamage))]
+[RequireComponent(typeof(EnemyHealthBar))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Animator _hitAnim;
@@ -11,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyDetailsSO _enemyDetails;
     
     private Health _health;
+    private EnemyHealthBar _healthBar;
     private EnemyDamage _damage;
     
     public int DefensePower => _enemyDetails.DefencePower;
@@ -20,14 +22,20 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _health.SetStartHealth(_enemyDetails.MaxHealth);
-
+        _healthBar = GetComponent<EnemyHealthBar>();
         _damage = GetComponent<EnemyDamage>();
+    }
+
+    private void Start()
+    {
+        _health.SetStartHealth(_enemyDetails.MaxHealth);
     }
 
     public void EnemyHit(int damageAmount)
     {
         _hitAnim.SetTrigger("Hit");
+
+        _healthBar.ReduceHealthGauge(_health.MaxHealth, _health.CurrentHealth, damageAmount);
 
         _health.TakeDamage(damageAmount);
 

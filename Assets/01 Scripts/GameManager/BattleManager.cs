@@ -30,6 +30,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     [SerializeField] private GameObject _text;
     [SerializeField] private GameObject _menuInBattleBox;
     [SerializeField] private GameObject _playerAttackMode;
+    [SerializeField] private GameObject _battleUI;
 
     private InputActions _inputActions;
     private BattleMenuButton _curMenu;
@@ -54,6 +55,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         set { _curTargetEnemy = value; }
     }
 
+    public GameObject BattleUI { get { return _battleUI; } }
 
     private readonly Vector3 _menuOffset = new Vector3(-5, 0, 0);
     private readonly Vector3 _detailMenuOffset = new Vector3(-18, 0, 0);

@@ -30,6 +30,12 @@ public class GameResources : MonoBehaviour
     public PlayerDetailsSO PlayerDetails;
     #endregion
 
+    #region ENEMY
+    [Space(10)]
+    [Header("ENEMY")]
+    public GameObject EnemyHPBarPrefab;
+    #endregion
+
     #region DAMAGE NUMBER
     [Space(10)]
     [Header("DAMAGE NUMBER")]

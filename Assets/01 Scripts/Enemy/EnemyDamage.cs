@@ -12,7 +12,7 @@ public class EnemyDamage : MonoBehaviour
     public void ShowDamage(int damageAmount)
     {
         string damageStr = damageAmount.ToString();
-
+        
         Vector3 pos = _damagePosition.position - (damageStr.Length / 2) * _damageInterval;
 
         if (damageStr.Length % 2 == 0)

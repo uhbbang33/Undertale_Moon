@@ -4,7 +4,10 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private int _maxHealth;
+    public int MaxHealth { get { return _maxHealth; } }
+
     private int _currentHealth;
+    public int CurrentHealth { get { return _currentHealth; } }
 
     private bool _isInvincible;
 
@@ -61,7 +64,7 @@ public class Health : MonoBehaviour
     }
 
 
-    // player, enemy, UI¿¡¼­ ±¸µ¶
+    // player, enemy, UIì—ì„œ êµ¬ë…
     private void CallHealthEvent(bool isIncreaseHealth, int healthAmount)
     {
         _healthEvent.CallHealthChangedEvent(isIncreaseHealth, healthAmount);

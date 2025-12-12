@@ -69,6 +69,11 @@ public class PoolManager : SingletonMonoBehaviour<PoolManager>
         {
             Pool pool = _pools.Find(p => p.PoolName == objName);
             obj = Instantiate(pool.Prefab, pool.ParentTransform);
+
+            PoolObject poolObject = obj.AddComponent<PoolObject>();
+            poolObject.PoolKey = pool.PoolName;
+
+            // TODO: 새로 생성한 obj 부모 transform 밑으로 들어가지 않음
         }
         else
         {
