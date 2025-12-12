@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 201502748622361201}
   - component: {fileID: 7817980224000586727}
   m_Layer: 0
-  m_Name: Enemy_Frog
+  m_Name: Enemy_Froggit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

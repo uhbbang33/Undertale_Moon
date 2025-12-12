@@ -8,7 +8,7 @@ using DG.Tweening;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Animator _hitAnim;
-    [SerializeField] private FrogHeadMove _headMove;
+    [SerializeField] private FroggitHeadMove _headMove;
     [SerializeField] private EnemyDetailsSO _enemyDetails;
     
     private Health _health;

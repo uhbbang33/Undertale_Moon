@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class FrogHeadMove : MonoBehaviour
+public class FroggitHeadMove : MonoBehaviour
 {
     [SerializeField] private float _movePeriod;
     [SerializeField] private float _moveXScale;
