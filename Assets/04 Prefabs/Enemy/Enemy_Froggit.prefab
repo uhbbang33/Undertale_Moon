@@ -165,6 +165,8 @@ MonoBehaviour:
   _hitAnim: {fileID: 5253155166155890797}
   _headMove: {fileID: 3582974817345602375}
   _enemyDetails: {fileID: 11400000, guid: 2a8a971e75e32eb4d91a57957dd5ae66, type: 2}
+  _skillPrefabs:
+  - {fileID: 1273802416044782037, guid: 02b8b9e35df813a439c853fb063ae387, type: 3}
 --- !u!114 &5762623761405388721
 MonoBehaviour:
   m_ObjectHideFlags: 0

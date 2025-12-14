@@ -22,6 +22,8 @@ public class PlayerMove : MonoBehaviour
 
         _inputActions.Player.Move.performed += OnMovePerformed;
         _inputActions.Player.Move.canceled += OnMoveCanceled;
+
+        transform.position = new Vector2(0f, -8f);
     }
 
     protected virtual void OnDisable()

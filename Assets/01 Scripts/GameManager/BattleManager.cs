@@ -57,9 +57,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public GameObject BattleUI { get { return _battleUI; } }
 
+    public Vector3 PlayerPosition { get { return _playerHeart.transform.position; } }
+
     private readonly Vector3 _menuOffset = new Vector3(-5, 0, 0);
     private readonly Vector3 _detailMenuOffset = new Vector3(-18, 0, 0);
-
+    
 
     #region MonoBehaviour
 
