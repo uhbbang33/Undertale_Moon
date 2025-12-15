@@ -17,8 +17,6 @@ public class FroggitSkillFrog : MonoBehaviour
     
     private readonly Vector2 _startPos = new Vector2(7f, -14.3f);
 
-    public event Action OnSkillFinish;
-
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -52,7 +50,8 @@ public class FroggitSkillFrog : MonoBehaviour
 
         yield return _waitForJump;
 
-        OnSkillFinish?.Invoke();
+        // 여기서 battle manager 함수 호출
+
 
         gameObject.SetActive(false);
     }

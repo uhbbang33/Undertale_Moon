@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1507487695244527256
 Transform:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _idleSprite: {fileID: 5104648564829428216, guid: 3c40b2b5c763d714ca2a4ab070a16393, type: 3}
   _jumpSprite: {fileID: -199097416636975947, guid: 3c40b2b5c763d714ca2a4ab070a16393, type: 3}
-  _idleTime: 5
+  _idleTime: 2.5
   _jumpTime: 1
   _jumpPower: 1400
 --- !u!50 &5254496643612507829

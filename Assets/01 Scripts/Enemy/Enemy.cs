@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(EnemyDamage))]
@@ -10,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Animator _hitAnim;
     [SerializeField] private FroggitHeadMove _headMove;
     [SerializeField] private EnemyDetailsSO _enemyDetails;
+    [SerializeField] private List<GameObject> _skillObjects;
     
     private Health _health;
     private EnemyHealthBar _healthBar;
@@ -47,5 +49,13 @@ public class Enemy : MonoBehaviour
         OnHit.Invoke();
 
         transform.DOShakePosition(1f, new Vector3(1.5f, 0f, 0f), 6, 0f, true, true, ShakeRandomnessMode.Full);
+    }
+
+    public void EnableSkill()
+    {
+        int skillIdx= UnityEngine.Random.Range(0, _skillObjects.Count);
+
+        Debug.Log(_skillObjects[skillIdx].name);
+        _skillObjects[skillIdx].SetActive(true);
     }
 }

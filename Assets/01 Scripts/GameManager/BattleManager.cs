@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public enum BattleState
 {
@@ -61,7 +62,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     private readonly Vector3 _menuOffset = new Vector3(-5, 0, 0);
     private readonly Vector3 _detailMenuOffset = new Vector3(-18, 0, 0);
-    
+
+    public event Action OnSkillFinish;
 
     #region MonoBehaviour
 
@@ -163,12 +165,12 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
         _playerHeart.SetActive(true);
 
-        // TODO: 2초 후 개구리 스킬
+        _curTargetEnemy.EnableSkill();
     }
 
     public void PlayerAttack(float bonus)
     {
-        int r = Random.Range(0, 3);
+        int r = UnityEngine.Random.Range(0, 3);
 
         // Round((PlayerATK - EnemyDEF + r) * bonus)
         float damageAmount = Mathf.Round(((float)_player.PlayerAttackPower -
