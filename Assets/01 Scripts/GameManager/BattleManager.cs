@@ -9,37 +9,47 @@ using System;
 public enum BattleState
 {
     SELECT_MENU,
-    SELECT_TARGET,
+    SELECT_ENEMY,
+    SELECT_ACT,
+    SELECT_ITEM,
+    SELECT_MERCY,
     PLAYER_ATTACK,
     ENEMY_ATTACK,
+    SHOW_ITEM_INFO,
     END
 }
 
+public enum MenuButton { FIGHT, ACT, ITEM, MERCY }
+
 public class BattleManager : SingletonMonoBehaviour<BattleManager>
 {
-    [SerializeField] private BattleMenuButton _fightButton;
-    [SerializeField] private Button _detailButtons_first;
-    [SerializeField] private GameObject _menuHeart;
-    [SerializeField] private AttackBar _attackBar;
-    [SerializeField] private BattleBox _battleBox;
-
-    [Tooltip("max 6")]
     [SerializeField] private List<EnemyDetailsSO> _enemies;
     [SerializeField] private List<Transform> _enemiesPos;
     [SerializeField] private List<TextMeshProUGUI> _nameTexts;
-
+    [SerializeField] private List<BattleMenuButton> _menuButtons;
+    [SerializeField] private List<DetailMenuButton> _detailButtons;
+    
+    [Space(10)]
+    [Header("GameObject")]
     [SerializeField] private GameObject _text;
     [SerializeField] private GameObject _menuInBattleBox;
     [SerializeField] private GameObject _playerAttackMode;
     [SerializeField] private GameObject _battleUI;
+    [SerializeField] private GameObject _menuHeart;
+
+    [Space(10)]
+    [Header("etc")]
+    [SerializeField] private AttackBar _attackBar;
+    [SerializeField] private BattleBox _battleBox;
+
+    [SerializeField] private float _battleSize_Height;
+    [SerializeField] private float _battleSize_Width;
 
     private InputActions _inputActions;
     private BattleMenuButton _curMenu;
-    [SerializeField] private List<DetailMenuButton> _detailButtons;
     private DetailMenuButton _curDetailMenu;
-    private BattleState _battleState;
-    private BattleState _prevBattleState;
     private Enemy _curTargetEnemy;
+    private Stack<BattleState> _menuStack;
 
     // TODO : Init에서 생성된 Player Heart 넣기 ( SerializeField 삭제 )
     [SerializeField] private GameObject _playerHeart;
@@ -47,8 +57,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     // TODO : GameManager에서 받기
     [SerializeField] private Player _player;
 
-    [SerializeField] private float _battleSize_Height;
-    [SerializeField] private float _battleSize_Width;
+
+    #region Property
 
     public Enemy CurTargetEnemy
     {
@@ -60,10 +70,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public Vector3 PlayerPosition { get { return _playerHeart.transform.position; } }
 
+    #endregion Property
+
     private readonly Vector3 _menuOffset = new Vector3(-5, 0, 0);
     private readonly Vector3 _detailMenuOffset = new Vector3(-18, 0, 0);
-
-    public event Action OnSkillFinish;
 
     #region MonoBehaviour
 
@@ -72,20 +82,21 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         base.Awake();
 
         _inputActions = new InputActions();
+        _menuStack = new Stack<BattleState>();
     }
 
     private void OnEnable()
     {
         _inputActions.Enable();
         
-        _inputActions.UI.Submit.performed += OnSubmitPerformed;
+        _inputActions.UI.Cancel.performed += OnCancelPerformed;
 
         _attackBar.OnAttack += PlayerAttack;
     }
 
     private void OnDisable()
     {
-        _inputActions.UI.Submit.performed -= OnSubmitPerformed;
+        _inputActions.UI.Cancel.performed -= OnCancelPerformed;
 
         _attackBar.OnAttack -= PlayerAttack;
 
@@ -94,11 +105,13 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     void Start()
     {
-        //_prevBattleState = BattleState.SELECT_MENU;
-        //_battleState = BattleState.SELECT_MENU;
         //_player = GameManager.Instance.player;
 
-        EventSystem.current.SetSelectedGameObject(_fightButton.gameObject);
+        _menuStack.Push(BattleState.SELECT_MENU);
+        ChangeBattleState(BattleState.SELECT_MENU);
+        
+        for(int i =0; i < _menuButtons.Count; ++i)
+            _menuButtons[i].Menu = (MenuButton)i;
 
         InitEnemies();
     }
@@ -126,6 +139,56 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         }
     }
 
+    public void ChangeBattleState(BattleState current)
+    {
+        if (current != BattleState.SELECT_MENU)
+        {
+            _menuStack.Push(current);
+        }
+
+        switch (current)
+        {
+            case BattleState.SELECT_MENU:
+                _menuInBattleBox.SetActive(false);
+                _text.SetActive(false);
+
+                EventSystem.current.SetSelectedGameObject(_menuButtons[0].gameObject);
+                break;
+
+            case BattleState.SELECT_ENEMY:
+                ShowEnemiesName();
+
+                EventSystem.current.SetSelectedGameObject(_detailButtons[0].gameObject);
+                break;
+
+            case BattleState.SELECT_ACT:
+                break;
+
+            case BattleState.SELECT_ITEM:
+                break;
+
+            case BattleState.SELECT_MERCY:
+                break;
+
+            case BattleState.PLAYER_ATTACK:
+                PlayerAttackMode();
+                break;
+
+            case BattleState.ENEMY_ATTACK:
+                while (_menuStack.Peek() != BattleState.SELECT_MENU)
+                {
+                    _menuStack.Pop();
+                }
+
+                EnemyAttackMode();
+                break;
+
+            case BattleState.SHOW_ITEM_INFO:
+
+                break;
+        }
+    }
+
     public void MenuButtonHighlighted(BattleMenuButton btn)
     {
         _menuHeart.transform.position = btn.transform.position + _menuOffset;
@@ -138,25 +201,20 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         _curDetailMenu = btn;
     }
     
-    public void HighlightFirstDetailMenu()
-    {
-        EventSystem.current.SetSelectedGameObject(_detailButtons_first.gameObject);
-    }
-
-    private void ShowTargetEnemies()
+    private void ShowEnemiesName()
     {
         _text.SetActive(false);
         _menuInBattleBox.SetActive(true);
     }
 
-    public void PlayerAttackMode()
+    private void PlayerAttackMode()
     {
         _menuInBattleBox.SetActive(false);
         _menuHeart.SetActive(false);
         _playerAttackMode.SetActive(true);
     }
 
-    public void EnemyAttackMode()
+    private void EnemyAttackMode()
     {
         _playerAttackMode.SetActive(false);
 
@@ -184,15 +242,12 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     #region INPUT_SYSTEM
 
-    private void OnSubmitPerformed(InputAction.CallbackContext context)
+    private void OnCancelPerformed(InputAction.CallbackContext context)
     {
-        if (_curMenu == _fightButton)
+        if (_menuStack.Peek() != BattleState.SELECT_MENU)
         {
-            _battleState = BattleState.SELECT_TARGET;
-
-            ShowTargetEnemies();
-
-            _curMenu = null;
+            _menuStack.Pop();
+            ChangeBattleState(_menuStack.Peek());
         }
     }
 

@@ -62,7 +62,7 @@ public class AttackBar : MonoBehaviour, ISubmitHandler
 
         _spriteRenderer.sprite = _originSprite;
 
-        BattleManager.Instance.EnemyAttackMode();
+        BattleManager.Instance.ChangeBattleState(BattleState.ENEMY_ATTACK);
         StopCoroutine(_curCoroutine);
 
         yield return null;

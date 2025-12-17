@@ -50,8 +50,7 @@ public class FroggitSkillFrog : MonoBehaviour
 
         yield return _waitForJump;
 
-        // 여기서 battle manager 함수 호출
-
+        BattleManager.Instance.ChangeBattleState(BattleState.SELECT_MENU);
 
         gameObject.SetActive(false);
     }

@@ -4324,7 +4324,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93fa82a3b7a5284b8de6e6ecaed4868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fightButton: {fileID: 1006947008}
+  _menuButtons:
+  - {fileID: 1006947008}
+  - {fileID: 25633473}
+  - {fileID: 602600946}
+  - {fileID: 1462161175}
   _detailButtons_first: {fileID: 886535960}
   _menuHeart: {fileID: 1650603674}
   _attackBar: {fileID: 1083281904}

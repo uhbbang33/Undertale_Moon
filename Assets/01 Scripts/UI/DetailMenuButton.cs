@@ -12,8 +12,8 @@ public class DetailMenuButton : MonoBehaviour, ISelectHandler, ISubmitHandler
     
     public void OnSubmit(BaseEventData eventData)
     {
-        BattleManager.Instance.PlayerAttackMode();
-
         BattleManager.Instance.CurTargetEnemy = enemy;
+
+        BattleManager.Instance.ChangeBattleState(BattleState.PLAYER_ATTACK);
     }
 }
